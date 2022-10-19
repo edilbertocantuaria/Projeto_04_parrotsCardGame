@@ -1,18 +1,79 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 * {
   box-sizing: border-box;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  line-height: 66px;
+  letter-spacing: -0.004em;
+  color: #75B79E;
 }
 
 body {
   width: 100%;
-  background-color: #EEF9BF;
+  height: 100%;
+  background-color: #EEF9BF;  
+}
 
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-font-size: 56px;
-line-height: 66px;
-letter-spacing: -0.004em;
-color: #75B79E;
+header{
+  padding-top: 40px;
+  text-align: center;
 
+}
+
+main{
+  width: 85%;
+  height:100%;
+  margin: 50px auto;
+  background: blue;
+}
+
+/*Ajustes de posicionamento*/
+.centHorVert{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centHorVert2{
+display: flex;
+align-items: center;
+justify-content: space-around;
+}
+
+.disWrap{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-around;
+}
+/*-----------------------------------------------------------------------*/
+
+/*Ajust de imagens*/
+img{
+width: 100px;
+height: 100px;
+}
+/*-----------------------------------------------------------------------*/
+
+/*titulo*/
+.titulo{
+  width: 100%;
+  height: 63px;
+  font-size: 56px;
+  background: red;
+}
+
+/*Cartas*/
+.cartas{
+  padding: 34px;
+  gap: 34px;
+  }
+.carta{
+width: 117px;
+height: 146px;
+border: 1px solid black;
+/*border: 1px solid #99CEA8;*/
+border-radius: 5px;
+background: #A7E9AF;
 }
