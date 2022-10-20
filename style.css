@@ -75,6 +75,7 @@ height: 146px;
 border: 1px solid #99CEA8;
 border-radius: 5px;
 background: #A7E9AF;
+transition: all 1s linear;
 
 
 }
@@ -86,6 +87,6 @@ background: #A7E9AF;
 
 }
 
- .carta:hover{
-  transform: scale(1.5); 
-} 
+ /* .carta:hover{
+  transform: scale(1.15); 
+}  */
