@@ -20,7 +20,6 @@ main{
   width: 85%;
   height:100%;
   margin: 50px auto;
-  background: blue;
 }
 
 /*Ajustes de posicionamento*/
@@ -62,7 +61,6 @@ height: 100px;
   letter-spacing: -0.004em;
   color: #75B79E;
   font-size: 56px;
-  background: red;
 }
 
 /*Cartas*/
@@ -77,6 +75,17 @@ height: 146px;
 border: 1px solid #99CEA8;
 border-radius: 5px;
 background: #A7E9AF;
+
+
 }
 
+/*Animação*/
+.virar{
+  background-color: aqua;
+  transform: rotateY(180deg);
 
+}
+
+ .carta:hover{
+  transform: scale(1.5); 
+} 
