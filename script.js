@@ -24,15 +24,34 @@ function adicionarCartas(numCartas){
     const adicionarCartas = document.querySelector('.cartas');
 
 for(let contador=0;contador<numCartas; contador++){
-adicionarCartas.innerHTML += `<div class="carta centHorVert" onclick="virarCarta(this)"> 
-<img src="Imagens/Para as cartas/back.png" class="MostrarParrot"/>
+adicionarCartas.innerHTML += `<div class="carta centHorVert" onclick="virarCarta(this, '.papagaioVerso')"> 
+<div class="versoCarta">
+<img class="papagaioVerso"src="Imagens/Para as cartas/back.png" class="MostrarParrot"/>
 </div>`
 } 
-
 }
 
-function virarCarta(cartaSelecionada){
+function virarCarta(cartaSelecionada,  imgPapagaio){
+  const imgPapagaioVirado =document.querySelector('.virar .versoCarta .papagaioVerso');
+  
+  imgPapagaio = document.querySelector('.versoCarta .papagaioVerso');
+  //  imgPapagaio = document.querySelector('.versoCarta .papagaioVerso');
+
+  if (imgPapagaioVirado===null){
+  imgPapagaio.classList.add("ocultarCarta")
+  alert("entrou no if")
+  console.log(imgPapagaio)
+  } else { 
+    imgPapagaio.classList.remove("ocultarCarta")
+   alert("entrou no else")
+    console.log(imgPapagaio)
+  }
  cartaSelecionada.classList.toggle("virar")
+
+//  const ocultarCartaSelecionada = document.querySelector (".carta .versoCarta .virar")
+// console.log (ocultarCartaSelecionada)
+
+// cartaSelecionada.classList.toggle("versoCarta ocultarCarta")
 
 }
 

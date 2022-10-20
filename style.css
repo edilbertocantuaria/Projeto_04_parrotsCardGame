@@ -67,7 +67,8 @@ height: 100px;
 .cartas{
   padding: 34px;
   gap: 34px;
-  }
+background-color: purple; 
+}
 .carta{
 width: 117px;
 height: 146px;
@@ -76,9 +77,25 @@ border: 1px solid #99CEA8;
 border-radius: 5px;
 background: #A7E9AF;
 transition: all 1s linear;
-
-
 }
+
+/*Opacity:0 -> esconde tudo
+Opacity:1 -> mostra tudo*/
+
+.versoCarta{
+  background-color: azure;
+  visibility:visible;
+}
+.ocultarCarta{
+  visibility: hidden;
+}
+/* .frenteCarta{
+  background-color: blue;
+} */
+
+/* .carta .virar .versoCarta .papagaioVerso{
+  visibility: hidden;
+} */
 
 /*Animação*/
 .virar{
