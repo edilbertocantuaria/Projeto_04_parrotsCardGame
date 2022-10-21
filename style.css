@@ -7,6 +7,8 @@
 body {
   width: 100%;
   height: 100%;
+  font-family: "Roboto";
+  font-style: normal;
   background-color: #EEF9BF;  
 }
 
@@ -54,8 +56,6 @@ height: 100px;
 .titulo{
   width: 100%;
   height: 63px;
-  font-family: "Roboto";
-  font-style: normal;
   font-weight: 700;
   line-height: 66px;
   letter-spacing: -0.004em;
@@ -65,43 +65,42 @@ height: 100px;
 
 /*Cartas*/
 .cartas{
-  padding: 34px;
+  padding: 10px;
   gap: 34px;
-background-color: purple; 
 }
+
 .carta{
 width: 117px;
 height: 146px;
+position: relative;
 
 border: 1px solid #99CEA8;
 border-radius: 5px;
-background: #A7E9AF;
-transition: all 1s linear;
+transition: all 1s ease;
+transform-style: preserve-3d;
 }
 
-/*Opacity:0 -> esconde tudo
-Opacity:1 -> mostra tudo*/
+.face{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #A7E9AF;
+}
 
 .versoCarta{
-  background-color: azure;
-  visibility:visible;
+backface-visibility: hidden;
 }
-.ocultarCarta{
-  visibility: hidden;
-}
-/* .frenteCarta{
-  background-color: blue;
-} */
 
-/* .carta .virar .versoCarta .papagaioVerso{
-  visibility: hidden;
-} */
+.frenteCarta{
+  transform: rotateY(180deg);
+}
+
+
+
 
 /*Animação*/
 .virar{
-  background-color: aqua;
   transform: rotateY(180deg);
-
 }
 
  /* .carta:hover{
