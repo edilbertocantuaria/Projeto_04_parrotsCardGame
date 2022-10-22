@@ -1,7 +1,16 @@
-let boraJogar=0;
-let numCartas= prompt("Olá, vamos jogar um jogo! 😁 \nDigite um número par entre 4 e 14");
+let boraJogar=0; /*Variável que, quando igual a 1, inicia a partida. Essencial na função iniciarJogo*/ 
+let numCartas;
+let contadorJogadas=0;
+let contadorAcerto =0;
+let contagemFinalizarPartida =0;
+let tempoPartida =0;
+let statusJogo =0;  /*Variável que quando ficar "jogando" vai contabilizar o tempo e quando estiver "ganhou" para a contagem do tempo*/ 
+let intervalo;
+let cartasViradas=[];
+const numCartasSelecionadas=[]; 
 
-const parrots=[
+/*Array com as imagens dos parrots*/ 
+const imgParrots=[
   'bobrossparrot.gif',
   'explodyparrot.gif',
   'fiestaparrot.gif',
@@ -11,44 +20,55 @@ const parrots=[
   'unicornparrot.gif'
 ];
 
-const numCartasSelecionadas=[]; 
+/*Função responsável pelo prompt inicial, que pergunta o numero de cartas*/
+  numCartas = prompt("Olá, vamos jogar Parrots Card! 😁 \nDigite um número par entre 4 e 14");
+  do{
+    /*Esse if foi colocado exatamente para sair quando o usuário clicar em "cancelar"*/
+    
+        if (numCartas===null ){
+        boraJogar=1
+        } 
+        else {
+        numCartas = Number(numCartas);
+        const numImpar = numCartas%2;
+    
+            if ((numCartas>=4 &&numCartas<=14) && (numImpar==0)){
+            boraJogar=1;
+           
+            /*Ajusta o código para que a div  cartas fique com o tamanho ideal para numCartas, dividindo igualmente em duas linhas*/
+            let widthJogo = (numCartas)/2 *150
+            let dim = document.querySelector(".cartas");
+            dim.style.width = widthJogo + "px"
+       
+            /*adicionarCartas(numCartas);*/
+            colocarVerso(numCartas);    
+            }
+            else{
+            numCartas= prompt("Olá, vamos jogar um jogo! 😁 \nDigite um número par entre 4 e 14");
+            }
+    }
+    }while  (boraJogar!=1)
 
+/*Função repsonsável para colocar um verso nas cartas*/ 
+function  colocarVerso(numCartas){
 
+  for (let i=0; i<(numCartas/2); i++){
+  numCartasSelecionadas.push(imgParrots[i]);
+  numCartasSelecionadas.push(imgParrots[i]);
+  }
 
-
-do{
-/*Esse if foi colocado exatamente para sair quando o usuário clicar em "cancelar"*/
-if (numCartas===null ){
-   boraJogar=1
-} 
-else {
-numCartas = Number(numCartas);
-const numImpar = numCartas%2;
-
-if ((numCartas>=4 &&numCartas<=14) && (numImpar==0)){
-    boraJogar=1;
-
-  let widthJogo = (numCartas)/2 *150
-  let dim = document.querySelector(".cartas");
-  dim.style.width = widthJogo + "px"
-   
-  adicionarCartas(numCartas);
-  colocarVerso(numCartas);
-
+adicionarCartas();
 }
-else{
-numCartas= prompt("Olá, vamos jogar um jogo! 😁 \nDigite um número par entre 4 e 14");
-}
-}
-}while  (boraJogar!=1)
 
-function adicionarCartas(numCartas){
+/*Adiciona a quantidade de cartas desejadas pelo usuário*/ 
+function adicionarCartas(){
     const adicionarCartas = document.querySelector('.cartas');
 
-for(let contador=0;contador<numCartas; contador++){
+numCartasSelecionadas.sort(comparador); /*Embaralha o array*/
+for(let i=0; i< numCartasSelecionadas.length; i++){
 adicionarCartas.innerHTML += `<div class="carta" onclick="virarCarta(this)"> 
 <div class="face frenteCarta centHorVert">
-<img class="papagaioFrente" src="Imagens/Para as cartas/tripletsparrot.gif" class="MostrarParrot"/>
+<img class="papagaioFrente" src="Imagens/Para as cartas/${numCartasSelecionadas[i]}" class="MostrarParrot"/>
 </div>
 
 <div class="face versoCarta centHorVert">
@@ -61,6 +81,20 @@ adicionarCartas.innerHTML += `<div class="carta" onclick="virarCarta(this)">
 
 function virarCarta(cartaSelecionada){
  cartaSelecionada.classList.toggle("virar")
+}
+
+function compararCartas(){
+//verificar se as cartas estão
+// const teste = document.querySelector(".virar .papagaioFrente").src pega o src da
+
+//se estiverem viradas, vai comparar o src delas
+//se os src forem iguais, blz! 
+//se diferente, remove a classe virada.
+}
+
+/*Código que pediram pra eu colocar*/
+function comparador() { 
+	return Math.random() - 0.5; 
 }
 
 
