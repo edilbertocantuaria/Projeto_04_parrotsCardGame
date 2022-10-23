@@ -61,16 +61,20 @@ numCartas = prompt("Olá, vamos jogar Parrots Card! 😁 \nDigite um número par
          Digite 'fácil', 'médio' ou 'difícil'`)
             
           if(nivelDificuldade==="fácil"){
+            desabilitarTudo();
             setTimeout(desvirarCartaInicial, (numCartas*1000));
             boraDificultar=1;
           } else if(nivelDificuldade==="médio"){
+            desabilitarTudo();
             setTimeout(desvirarCartaInicial, (numCartas*500));
             boraDificultar=1;
           } else if(nivelDificuldade==="difícil"){
+            desabilitarTudo();
             setTimeout(desvirarCartaInicial, (numCartas*300));
             boraDificultar=1;
           } else {
             alert("Nível de dificuldade inválido")
+            boraDificultar=0;
           }
         }while (boraDificultar!==1);
             }
@@ -118,6 +122,7 @@ function virarCarta(cartaSelecionada){
 
 if (contadorCartasClicadas==2){
 cartaVirada = document.querySelectorAll(".naoEscolhida.virar  .frenteCarta");
+  desabilitarTudo();
 /*cartaVirada vai retornar uma nodeList*/
 
 compararCartas(cartaVirada);
@@ -128,13 +133,12 @@ cartaVirada=[];
 }
 
 function desvirarCarta(primeiraCarta, segundaCarta){
- 
  if(primeiraCarta.classList.value === segundaCarta.classList.value){
   primeiraCarta.classList.remove("virar");
   primeiraCarta.classList.remove("parErrado");
   segundaCarta.classList.remove("virar");
   segundaCarta.classList.remove("parErrado");
-
+  habilitarTudo();
  } else{
   alert("BUG! TÁ PEGANDO CARTA COM PAR CERTO!")
  }
@@ -146,13 +150,16 @@ function desvirarCarta(primeiraCarta, segundaCarta){
 /*Código que permite que as cartas iniciem desviradas*/
 function desvirarCartaInicial(){
   const desvirarCarta = document.querySelectorAll(".carta.virar");
+
   for (let i=0; i<desvirarCarta.length; i++){
   desvirarCarta[i].classList.remove("virar");
    }
+  habilitarTudo(); /*Permite que as cartas possam ser habilitadas para virar*/ 
    codigoPararCronometro = setInterval(cronometro, 1000)
   }
 
 function compararCartas(cartaVirada){
+
  if (cartaVirada[0].classList.value==cartaVirada[1].classList.value){
 primeiraCarta=cartaVirada[0].parentNode
 segundaCarta=cartaVirada[1].parentNode
@@ -164,6 +171,7 @@ segundaCarta.classList.remove("naoEscolhida");
 
 contadorAcerto++;
 contadorJogadas++;
+habilitarTudo();
 
 setTimeout(function(){finalizarJogo(contadorAcerto, contadorJogadas)}, 500) 
  } 
@@ -223,4 +231,18 @@ function limparJogo(){
   tempoPartida =0;
   numCartas=0; 
   numCartasSelecionadas=[];
+}
+
+function habilitarTudo(){
+  let habilitarTudo = document.querySelectorAll(".carta.naoEscolhida");
+  for (let i=0; i<habilitarTudo.length; i++){
+    habilitarTudo[i].setAttribute("onclick","virarCarta(this)" )
+  }
+}
+
+function desabilitarTudo(){
+ let desabilitarTudo = document.querySelectorAll(".carta.naoEscolhida")
+for (let i=0; i<desabilitarTudo.length; i++){
+desabilitarTudo[i].removeAttribute("onclick");
+}
 }
