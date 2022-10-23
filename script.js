@@ -1,5 +1,6 @@
 let boraJogar=0; /*Variável que, quando igual a 1, inicia a partida. Essencial na função iniciarJogo*/ 
 let boraParar=0;/*Variável que, quando igual a 1, reinicia/cancela a partida. Essencial na função finalizarJogo*/
+let boraDificultar=0; /*Variável que, quando igual a 1, sinaliza a inserção do nível de dificuldade*/ 
 let contadorCartasClicadas =0; /*Variável que, quando igual a 2, permite comparar as cartas*/ 
 
 let codigoPararCronometro;
@@ -10,7 +11,7 @@ let contadorAcerto =0;
 let tempoPartida =0;
 
 let cartaVirada=[];
-const numCartasSelecionadas=[]; 
+let numCartasSelecionadas=[]; 
 
 /*Array com as imagens dos parrots*/ 
 const imgParrots=[
@@ -23,8 +24,7 @@ const imgParrots=[
   'unicornparrot.gif'
 ];
 
-iniciarJogo();
-
+iniciarJogo()
 /*Função responsável pelo prompt inicial, que pergunta o numero de cartas*/
 function iniciarJogo(){  
 numCartas = prompt("Olá, vamos jogar Parrots Card! 😁 \nDigite um número par entre 4 e 14");
@@ -50,8 +50,28 @@ numCartas = prompt("Olá, vamos jogar Parrots Card! 😁 \nDigite um número par
             colocarVerso(numCartas);
             
             /*O jogo inicialmente vai começar com todas cartas viradas. O tempo para memorizar é propocional ao número de cartas escolhido!*/ 
+          do{
+            let nivelDificuldade = prompt (`Antes de jorgamos, vamos escolher o nível de dificuldade? Vou te mostrar o jogo por um tempo proporcional ao número de cartas e ao nível de ficuldade que você escolher!
+          O tempo da partida só será contabilizado assim que todas cartas virarem" 🤓
+          fácil  - 1 segundo para ver cada carta [de 4s a 14s para memorizar];
+          médio - 0,5 segundos para ver cada carta [de 2s a 7s para memorizar];
+          difícil - 0,3 segundos para ver cada carta. [de 1,2s a 4,2s para memorizar] 
+          
+          Digite 'fácil', 'médio' ou 'difícil'`)
+            
+          if(nivelDificuldade==="fácil"){
+            setTimeout(desvirarCartaInicial, (numCartas*1000));
+            boraDificultar=1;
+          } else if(nivelDificuldade==="médio"){
+            setTimeout(desvirarCartaInicial, (numCartas*500));
+            boraDificultar=1;
+          } else if(nivelDificuldade==="difícil"){
             setTimeout(desvirarCartaInicial, (numCartas*300));
-
+            boraDificultar=1;
+          } else {
+            alert("Nível de dificuldade inválido")
+          }
+        }while (boraDificultar!==1);
             }
             else{
             numCartas= prompt("Olá, vamos jogar um jogo! 😁 \nDigite um número par entre 4 e 14");
@@ -100,22 +120,34 @@ if (contadorCartasClicadas==2){
 cartaVirada = document.querySelectorAll(".virar .frenteCarta");
 /*cartaVirada vai retornar uma nodeList*/
 
-let primeiraCarta=cartaVirada[0].classList.value;
-let segundaCarta=cartaVirada[1].classList.value;
+// let primeiraCarta=cartaVirada[0].classList.value;
+// let segundaCarta=cartaVirada[1].classList.value;
+compararCartas(cartaVirada);
 
 contadorCartasClicadas=0;
-compararCartas(primeiraCarta, segundaCarta);
+cartaVirada=[];
+// compararCartas(primeiraCarta, segundaCarta);
 } 
 }
 
-function desvirarCarta(){
-  const desvirarCarta = document.querySelectorAll(".carta.virar.parErrado");
-  desvirarCarta[0].classList.remove("virar")
-  desvirarCarta[0].classList.remove("parErrado")
-  desvirarCarta[1].classList.remove("virar")
-  desvirarCarta[1].classList.remove("parErrado")
+function desvirarCarta(primeiraCarta, segundaCarta){
+  primeiraCarta.classList.remove("virar");
+  primeiraCarta.classList.remove("parErrado");
+  segundaCarta.classList.remove("virar");
+  segundaCarta.classList.remove("parErrado");
+  cartaVirada=[];
+
+  // let desvirarCarta = document.querySelectorAll("carta.virar");
+  // desvirarCarta[0].classList.remove("virar")
+  // // desvirarCarta[0].classList.remove("parErrado")
+  // desvirarCarta[1].classList.remove("virar")
+  // // desvirarCarta[1].classList.remove("parErrado")
+  // console.log(desvirarCarta)
 
   contadorJogadas++;
+  // desvirarCarta=[];
+  console.log(desvirarCarta)
+
   finalizarJogo(contadorAcerto, contadorJogadas)
 } 
 
@@ -128,30 +160,39 @@ function desvirarCartaInicial(){
    codigoPararCronometro = setInterval(cronometro, 1000)
   }
 
-function compararCartas(primeiraCarta, segundaCarta){
- if (primeiraCarta==segundaCarta){
-let acertoCarta = document.querySelectorAll(".carta.virar");
+function compararCartas(cartaVirada){
+ if (cartaVirada[0].classList.value==cartaVirada[1].classList.value){
+  alert("entrou no if de comparar cartas")
+// let acertoCarta = document.querySelectorAll(".carta.virar");
+primeiraCarta=cartaVirada[0].parentNode
+segundaCarta=cartaVirada[1].parentNode
+primeiraCarta.classList.add("parCorreto");
+segundaCarta.classList.add("parCorreto");
+// console.log(acertoCarta)
 
-acertoCarta[0].classList.add("parCorreto");
-acertoCarta[1].classList.add("parCorreto");
-
-
-acertoCarta=[];
+// acertoCarta=[];
+// console.log(acertoCarta)
 
 contadorAcerto++;
 contadorJogadas++;
-
+cartaVirada=[];
 setTimeout(function(){finalizarJogo(contadorAcerto, contadorJogadas)}, 500) 
  } 
  else {
-  let erroCarta = document.querySelectorAll(".carta.virar");
+  primeiraCarta=cartaVirada[0].parentNode
+  segundaCarta=cartaVirada[1].parentNode
+  primeiraCarta.classList.add("parErrado");
+  segundaCarta.classList.add("parErrado");
+  cartaVirada=[];
+// let erroCarta = document.querySelectorAll(".carta.virar");
 
-erroCarta[0].classList.add("parErrado");
-erroCarta[1].classList.add("parErrado");
+// erroCarta[0].classList.add("parErrado");
+// erroCarta[1].classList.add("parErrado");
 
-erroCarta=[];  
 
-  setTimeout (desvirarCarta, 1000);
+// erroCarta=[];  
+// console.log(erroCarta)
+setTimeout (function(){desvirarCarta(primeiraCarta, segundaCarta)}, 1000);
  }
 }
 
@@ -194,7 +235,9 @@ function cronometro( ){
 function limparJogo(){
   let limparCartas = document.querySelector('.cartas');
   limparCartas.innerHTML="";
-  // limparCartas=[];
-  console.log("deveria tá limpando o jogo!")
-  console.log(limparCartas)
+  contadorJogadas=0;
+  contadorAcerto =0;
+  tempoPartida =0;
+  numCartas=0; 
+  numCartasSelecionadas=[];
 }
