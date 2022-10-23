@@ -9,6 +9,7 @@ body {
   height: 100%;
   font-family: "Roboto";
   font-style: normal;
+  color: #75B79E;
   background-color: #EEF9BF;  
 }
 
@@ -59,7 +60,7 @@ height: 100px;
   font-weight: 700;
   line-height: 66px;
   letter-spacing: -0.004em;
-  color: #75B79E;
+ 
   font-size: 56px;
 }
 
@@ -96,6 +97,15 @@ backface-visibility: hidden;
 }
 
 
+/*Cronometro*/
+.cronometro{
+width: 150px;
+height: 16px;
+position: auto;
+
+margin-top: 10px;
+font-size: 20px;
+}
 
 
 /*Animação*/
