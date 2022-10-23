@@ -60,7 +60,6 @@ height: 100px;
   font-weight: 700;
   line-height: 66px;
   letter-spacing: -0.004em;
- 
   font-size: 56px;
 }
 
@@ -86,6 +85,7 @@ transform-style: preserve-3d;
   height: 100%;
   position: absolute;
   background: #A7E9AF;
+  transform: rotateX(0deg)
 }
 
 .versoCarta{
@@ -99,11 +99,12 @@ backface-visibility: hidden;
 
 /*Cronometro*/
 .cronometro{
-width: 150px;
-height: 16px;
-position: auto;
-
-margin-top: 10px;
+width: 250px;
+height: 25px;
+position: absolute;
+/* top: 9%; */
+top: 1.5%;
+right: 2%;
 font-size: 20px;
 }
 
@@ -112,7 +113,3 @@ font-size: 20px;
 .virar{
   transform: rotateY(180deg);
 }
-
- /* .carta:hover{
-  transform: scale(1.15); 
-}  */

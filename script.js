@@ -53,13 +53,13 @@ numCartas = prompt("Olá, vamos jogar Parrots Card! 😁 \nDigite um número par
             
             /*O jogo inicialmente vai começar com todas cartas viradas. O tempo para memorizar é propocional ao número de cartas escolhido!*/ 
           do{
-            let nivelDificuldade = prompt (`Antes de jorgamos, vamos escolher o nível de dificuldade? Vou te mostrar o jogo por um tempo proporcional ao número de cartas e ao nível de ficuldade que você escolher!
-          O tempo da partida só será contabilizado assim que todas cartas virarem" 🤓
-          fácil  - 1 segundo para ver cada carta [de 4s a 14s para memorizar];
-          médio - 0,5 segundos para ver cada carta [de 2s a 7s para memorizar];
-          difícil - 0,3 segundos para ver cada carta. [de 1,2s a 4,2s para memorizar] 
+            let nivelDificuldade = prompt (
+         `Antes de jorgamos, vamos escolher o nível de dificuldade? Vou te mostrar o jogo por um tempo proporcional ao número de cartas e ao nível de ficuldade que você escolher! O tempo da partida só será contabilizado assim que todas cartas virarem" 🤓
+         fácil  - 1 segundo para ver cada carta [de 4s a 14s para memorizar];
+         médio - 0,5 segundos para ver cada carta [de 2s a 7s para memorizar];
+         difícil - 0,3 segundos para ver cada carta. [de 1,2s a 4,2s para memorizar] 
           
-          Digite 'fácil', 'médio' ou 'difícil'`)
+         Digite 'fácil', 'médio' ou 'difícil'`)
             
           if(nivelDificuldade==="fácil"){
             setTimeout(desvirarCartaInicial, (numCartas*1000));
