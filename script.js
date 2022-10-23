@@ -74,7 +74,7 @@ adicionarCartas();
 /*Adiciona a quantidade de cartas desejadas pelo usuário*/ 
 function adicionarCartas(){
   
-const adicionarCartas = document.querySelector('.cartas');
+let adicionarCartas = document.querySelector('.cartas');
 
 numCartasSelecionadas.sort(embaralhar); /*Embaralha o array*/
 for(let i=0; i< numCartasSelecionadas.length; i++){
@@ -135,13 +135,13 @@ let acertoCarta = document.querySelectorAll(".carta.virar");
 acertoCarta[0].classList.add("parCorreto");
 acertoCarta[1].classList.add("parCorreto");
 
+
 acertoCarta=[];
-console.log(acertoCarta);
 
 contadorAcerto++;
 contadorJogadas++;
 
-setTimeout(function(){finalizarJogo(contadorAcerto, contadorJogadas)}, 1000) 
+setTimeout(function(){finalizarJogo(contadorAcerto, contadorJogadas)}, 500) 
  } 
  else {
   let erroCarta = document.querySelectorAll(".carta.virar");
@@ -150,7 +150,6 @@ erroCarta[0].classList.add("parErrado");
 erroCarta[1].classList.add("parErrado");
 
 erroCarta=[];  
-console.log(erroCarta);
 
   setTimeout (desvirarCarta, 1000);
  }
@@ -174,7 +173,7 @@ do{
     if(parada==="sim"){
     tempoPartida=0;
     limparJogo();
-    // iniciarJogo();
+    iniciarJogo();
     boraParar=1
   } else if (parada==="não" || parada===null){
    boraParar=1
@@ -193,9 +192,9 @@ function cronometro( ){
 }
 
 function limparJogo(){
-  const limparCartas = document.querySelectorAll('.carta');
-  /*limparCartas.innerHTML='';*/
-  limparCartas.length=0;
+  let limparCartas = document.querySelector('.cartas');
+  limparCartas.innerHTML="";
+  // limparCartas=[];
   console.log("deveria tá limpando o jogo!")
-  iniciarJogo();
+  console.log(limparCartas)
 }
