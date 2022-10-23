@@ -2,4 +2,8 @@
     .titulo{
      font-size: 36px !important;
   }
+  .cartas .carta{
+  margin-right: calc((100% - 120px) / 2);
+  margin-left: calc((100% - 120px) / 2);
+  }
   }

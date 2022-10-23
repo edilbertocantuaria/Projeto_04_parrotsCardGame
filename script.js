@@ -23,7 +23,6 @@ const imgParrots=[
   'pp6.jpg',
   'pp7.jpg',
   'pp8.jpg',
-
 ];
 
 iniciarJogo()
@@ -113,7 +112,6 @@ adicionarCartas.innerHTML += `<div class="carta virar naoEscolhida" onclick="vir
 } 
 } 
 
-
 function virarCarta(cartaSelecionada){
   cartaSelecionada.classList.add("virar");
   contadorCartasClicadas++;
@@ -126,7 +124,6 @@ compararCartas(cartaVirada);
 
 contadorCartasClicadas=0;
 cartaVirada=[];
-// compararCartas(primeiraCarta, segundaCarta);
 } 
 }
 
@@ -137,15 +134,11 @@ function desvirarCarta(primeiraCarta, segundaCarta){
   primeiraCarta.classList.remove("parErrado");
   segundaCarta.classList.remove("virar");
   segundaCarta.classList.remove("parErrado");
-  cartaVirada=[];
-console.log(primeiraCarta);
-console.log(segundaCarta);
+
  } else{
   alert("BUG! TÁ PEGANDO CARTA COM PAR CERTO!")
  }
   contadorJogadas++;
-
-  // console.log(desvirarCarta)
 
   finalizarJogo(contadorAcerto, contadorJogadas)
 } 
@@ -168,11 +161,10 @@ primeiraCarta.classList.add("parCorreto");
 primeiraCarta.classList.remove("naoEscolhida");
 segundaCarta.classList.add("parCorreto");
 segundaCarta.classList.remove("naoEscolhida");
-// console.log(acertoCarta)
 
 contadorAcerto++;
 contadorJogadas++;
-cartaVirada=[];
+
 setTimeout(function(){finalizarJogo(contadorAcerto, contadorJogadas)}, 500) 
  } 
  else {
@@ -181,12 +173,9 @@ setTimeout(function(){finalizarJogo(contadorAcerto, contadorJogadas)}, 500)
   primeiraCarta.classList.add("parErrado");
   segundaCarta.classList.add("parErrado");
   cartaVirada.length=0;
-  console.log("Adicionando a classe parErrado" + primeiraCarta);
-  console.log("Adicionando a classe parErrado" + segundaCarta);
 
 setTimeout (function(){desvirarCarta(primeiraCarta, segundaCarta)}, 1000);
  }
- cartaVirada=[];
 }
 
 /*Código que pediram pra eu colocar*/
