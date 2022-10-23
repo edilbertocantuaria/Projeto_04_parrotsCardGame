@@ -15,13 +15,15 @@ let numCartasSelecionadas=[];
 
 /*Array com as imagens dos parrots*/ 
 const imgParrots=[
-  'bobrossparrot.gif',
-  'explodyparrot.gif',
-  'fiestaparrot.gif',
-  'metalparrot.gif',
-  'revertitparrot.gif',
-  'tripletsparrot.gif',
-  'unicornparrot.gif'
+  'lj1.jpg',
+  'lj2.jpg',
+  'lj3.jpg',
+  'pp4.jpg',
+  'pp5.jpg',
+  'pp6.jpg',
+  'pp7.jpg',
+  'pp8.jpg',
+
 ];
 
 iniciarJogo()
@@ -98,7 +100,7 @@ let adicionarCartas = document.querySelector('.cartas');
 
 numCartasSelecionadas.sort(embaralhar); /*Embaralha o array*/
 for(let i=0; i< numCartasSelecionadas.length; i++){
-adicionarCartas.innerHTML += `<div class="carta virar" onclick="virarCarta(this)"> 
+adicionarCartas.innerHTML += `<div class="carta virar naoEscolhida" onclick="virarCarta(this)"> 
 <div class="face frenteCarta centHorVert ${numCartasSelecionadas[i]}">
 <img class="papagaioFrente"  src="Imagens/Para as cartas/${numCartasSelecionadas[i]}" />
 </div>
@@ -117,11 +119,9 @@ function virarCarta(cartaSelecionada){
   contadorCartasClicadas++;
 
 if (contadorCartasClicadas==2){
-cartaVirada = document.querySelectorAll(".virar .frenteCarta");
+cartaVirada = document.querySelectorAll(".naoEscolhida.virar  .frenteCarta");
 /*cartaVirada vai retornar uma nodeList*/
 
-// let primeiraCarta=cartaVirada[0].classList.value;
-// let segundaCarta=cartaVirada[1].classList.value;
 compararCartas(cartaVirada);
 
 contadorCartasClicadas=0;
@@ -131,22 +131,21 @@ cartaVirada=[];
 }
 
 function desvirarCarta(primeiraCarta, segundaCarta){
+ 
+ if(primeiraCarta.classList.value === segundaCarta.classList.value){
   primeiraCarta.classList.remove("virar");
   primeiraCarta.classList.remove("parErrado");
   segundaCarta.classList.remove("virar");
   segundaCarta.classList.remove("parErrado");
   cartaVirada=[];
-
-  // let desvirarCarta = document.querySelectorAll("carta.virar");
-  // desvirarCarta[0].classList.remove("virar")
-  // // desvirarCarta[0].classList.remove("parErrado")
-  // desvirarCarta[1].classList.remove("virar")
-  // // desvirarCarta[1].classList.remove("parErrado")
-  // console.log(desvirarCarta)
-
+console.log(primeiraCarta);
+console.log(segundaCarta);
+ } else{
+  alert("BUG! TÁ PEGANDO CARTA COM PAR CERTO!")
+ }
   contadorJogadas++;
-  // desvirarCarta=[];
-  console.log(desvirarCarta)
+
+  // console.log(desvirarCarta)
 
   finalizarJogo(contadorAcerto, contadorJogadas)
 } 
@@ -162,15 +161,13 @@ function desvirarCartaInicial(){
 
 function compararCartas(cartaVirada){
  if (cartaVirada[0].classList.value==cartaVirada[1].classList.value){
-  alert("entrou no if de comparar cartas")
-// let acertoCarta = document.querySelectorAll(".carta.virar");
 primeiraCarta=cartaVirada[0].parentNode
 segundaCarta=cartaVirada[1].parentNode
-primeiraCarta.classList.add("parCorreto");
-segundaCarta.classList.add("parCorreto");
-// console.log(acertoCarta)
 
-// acertoCarta=[];
+primeiraCarta.classList.add("parCorreto");
+primeiraCarta.classList.remove("naoEscolhida");
+segundaCarta.classList.add("parCorreto");
+segundaCarta.classList.remove("naoEscolhida");
 // console.log(acertoCarta)
 
 contadorAcerto++;
@@ -183,17 +180,13 @@ setTimeout(function(){finalizarJogo(contadorAcerto, contadorJogadas)}, 500)
   segundaCarta=cartaVirada[1].parentNode
   primeiraCarta.classList.add("parErrado");
   segundaCarta.classList.add("parErrado");
-  cartaVirada=[];
-// let erroCarta = document.querySelectorAll(".carta.virar");
+  cartaVirada.length=0;
+  console.log("Adicionando a classe parErrado" + primeiraCarta);
+  console.log("Adicionando a classe parErrado" + segundaCarta);
 
-// erroCarta[0].classList.add("parErrado");
-// erroCarta[1].classList.add("parErrado");
-
-
-// erroCarta=[];  
-// console.log(erroCarta)
 setTimeout (function(){desvirarCarta(primeiraCarta, segundaCarta)}, 1000);
  }
+ cartaVirada=[];
 }
 
 /*Código que pediram pra eu colocar*/
@@ -203,6 +196,7 @@ function embaralhar() {
 
 function finalizarJogo(contadorAcerto, contadorJogadas){
   if (contadorAcerto===(numCartas/2)){
+    contadorJogadas=2*contadorJogadas;
     clearInterval(codigoPararCronometro)
 do{
     const parada = prompt(`Parabéns! Você encerrou o jogo em ${tempoPartida} segundos e com ${contadorJogadas} jogadas! 
