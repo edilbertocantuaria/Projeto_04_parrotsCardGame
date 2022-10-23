@@ -1,12 +1,16 @@
 let boraJogar=0; /*Variável que, quando igual a 1, inicia a partida. Essencial na função iniciarJogo*/ 
 let numCartas;
+let contadorCartasClicadas =0; /*Variável que, quando igual a 2, permite comparar as cartas*/ 
+
 let contadorJogadas=0;
 let contadorAcerto =0;
-let contagemFinalizarPartida =0;
 let tempoPartida =0;
 let statusJogo =0;  /*Variável que quando ficar "jogando" vai contabilizar o tempo e quando estiver "ganhou" para a contagem do tempo*/ 
-let intervalo;
-let cartasViradas=[];
+
+let cartaVirada=[];
+
+// let primeiraCarta;
+// let segundaCarta;
 const numCartasSelecionadas=[]; 
 
 /*Array com as imagens dos parrots*/ 
@@ -41,7 +45,10 @@ const imgParrots=[
             dim.style.width = widthJogo + "px"
        
             /*adicionarCartas(numCartas);*/
-            colocarVerso(numCartas);    
+            colocarVerso(numCartas);
+            
+            /*O jogo inicialmente vai começar com todas cartas viradas. O tempo para memorizar é propocional ao número de cartas escolhido!*/ 
+            setTimeout(desvirarCartaInicial, (numCartas*300));
             }
             else{
             numCartas= prompt("Olá, vamos jogar um jogo! 😁 \nDigite um número par entre 4 e 14");
@@ -64,15 +71,15 @@ adicionarCartas();
 function adicionarCartas(){
     const adicionarCartas = document.querySelector('.cartas');
 
-numCartasSelecionadas.sort(comparador); /*Embaralha o array*/
+numCartasSelecionadas.sort(embaralhar); /*Embaralha o array*/
 for(let i=0; i< numCartasSelecionadas.length; i++){
-adicionarCartas.innerHTML += `<div class="carta" onclick="virarCarta(this)"> 
-<div class="face frenteCarta centHorVert">
-<img class="papagaioFrente" src="Imagens/Para as cartas/${numCartasSelecionadas[i]}" class="MostrarParrot"/>
+adicionarCartas.innerHTML += `<div class="carta virar" onclick="virarCarta(this)"> 
+<div class="face frenteCarta centHorVert ${numCartasSelecionadas[i]}">
+<img class="papagaioFrente"  src="Imagens/Para as cartas/${numCartasSelecionadas[i]}" />
 </div>
 
 <div class="face versoCarta centHorVert">
-<img class="papagaioVerso" src="Imagens/Para as cartas/back.png" class="MostrarParrot"/>
+<img class="papagaioVerso" src="Imagens/Para as cartas/back.png"/>
 </div>
 
 </div>`
@@ -80,21 +87,72 @@ adicionarCartas.innerHTML += `<div class="carta" onclick="virarCarta(this)">
 }
 
 function virarCarta(cartaSelecionada){
- cartaSelecionada.classList.toggle("virar")
+  cartaSelecionada.classList.add("virar");
+  contadorCartasClicadas++;
+
+if (contadorCartasClicadas==2){
+cartaVirada = document.querySelectorAll(".virar .frenteCarta");
+/*cartaVirada vai retornar uma nodeList*/
+
+let primeiraCarta=cartaVirada[0].classList.value;
+let segundaCarta=cartaVirada[1].classList.value;
+
+contadorCartasClicadas=0;
+// cartaVirada = []; /*Zera  o contador*/
+compararCartas(primeiraCarta, segundaCarta);
+} 
 }
 
-function compararCartas(){
-//verificar se as cartas estão
-// const teste = document.querySelector(".virar .papagaioFrente").src pega o src da
+function desvirarCarta(){
+  const desvirarCarta = document.querySelectorAll(".carta.virar");
+  desvirarCarta[0].classList.remove("virar")
+  desvirarCarta[1].classList.remove("virar")
 
-//se estiverem viradas, vai comparar o src delas
-//se os src forem iguais, blz! 
-//se diferente, remove a classe virada.
+  // for (let i=0; i<desvirarCarta.length; i++){
+  // desvirarCarta[i].classList.remove("virar");
+  // }
+
+  contadorJogadas++;
+  finalizarJogo(contadorAcerto, contadorJogadas)
+} 
+
+function desvirarCartaInicial(){
+  const desvirarCarta = document.querySelectorAll(".carta.virar");
+  for (let i=0; i<desvirarCarta.length; i++){
+  desvirarCarta[i].classList.remove("virar");
+   }
+  }
+
+function compararCartas(primeiraCarta, segundaCarta){
+ if (primeiraCarta==segundaCarta){
+
+contadorAcerto++;
+contadorJogadas++;
+
+/*Esse setTimeOut permite ver a última carta antes do prompt aparecer!*/
+setTimeout(function(){finalizarJogo(contadorAcerto, contadorJogadas)}, 650) 
+
+
+/*console.log("Número de acertos: " + contadorAcerto);
+console.log("Número de jogadas: " + contadorJogadas);*/
+ } 
+ else {
+  setTimeout (desvirarCarta, 1000);
+ }
 }
 
 /*Código que pediram pra eu colocar*/
-function comparador() { 
+function embaralhar() { 
 	return Math.random() - 0.5; 
+}
+
+function finalizarJogo(contadorAcerto, contadorJogadas){
+if (contadorAcerto==(numCartas/2)){
+  const parada = prompt(`Parabéns! Você encerrou o jogo em XX:XX segundos e com ${contadorJogadas} jogadas! 
+
+  Deseja jogar novamente?`)
+  console.log(parada)
+}
 }
 
 
@@ -133,7 +191,7 @@ function comparador() {
 // //pega as cartas viradas e compara se elas são iguais
 // //se são iguais, não vai virar novamente
 // //se são  diferentes, vai desvirar dentro de 1s  
-// // setTimeout (desvirarCartas, 1000)  -> SEM PARÊNTESES NO PARÂMETRO!
+// //  -> SEM PARÊNTESES NO PARÂMETRO!
 // }
 
 
